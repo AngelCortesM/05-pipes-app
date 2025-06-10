@@ -1,0 +1,15 @@
+<ul
+  class="menu menu-horizontal bg-base-200 rounded-box my-2 w-full justify-around"
+>
+  @for (route of routes; track route.path) {
+  <li>
+    <a
+      class="menu-item bg-slate-700 flex justify-center w-50"
+      [routerLink]="route.path"
+      routerLinkActive="text-black bg-secondary!"
+    >
+      <span>{{ route.title }}</span>
+    </a>
+  </li>
+  }
+</ul>
