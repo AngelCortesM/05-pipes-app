@@ -1,6 +1,21 @@
-<section class="mx-5">
-  <h1 class="text-2xl font-bold">Pipes Basicos</h1>
-  <h3 class="text-xl font-thin">Pipes incluidos en Angular</h3>
+<section class="flex mx-5 px-5">
+  <div class="flex-1">
+    <h1 class="text-2xl font-bold">Pipes Basicos</h1>
+    <h3 class="text-xl font-thin">Pipes incluidos en Angular</h3>
+  </div>
+  <div class="gap-2 flex align-middle self-center">
+    <h1 class="text-2xl font-bold">
+      Locale Actual
+      <span class="badge badge-secondary">{{ currentlocale() }}</span>
+    </h1>
+    <button (click)="changeLocale('fr')" class="btn btn-small btn-primary">
+      Changer en français</button
+    ><button (click)="changeLocale('en')" class="btn btn-small btn-primary">
+      Change to English</button
+    ><button (click)="changeLocale('es')" class="btn btn-small btn-primary">
+      Cambiar a español
+    </button>
+  </div>
 </section>
 <div class="stats shadow w-full">
   <div class="stat place-items-center">
