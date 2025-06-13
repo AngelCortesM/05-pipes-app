@@ -4,6 +4,7 @@
     <h3 class="text-xl font-thin">Pipes incluidos en Angular</h3>
   </div>
 </section>
+<div class="divider w-full"></div>
 <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
   <app-card title="i18nSelectPipe">
     <p>
@@ -15,7 +16,6 @@
     </button>
   </app-card>
 
-  <div class="divider"></div>
   <app-card title="i18nPluralPipe">
     <p>Actualmente {{ clients().length | i18nPlural : clientsMap() }}</p>
     <button
@@ -25,5 +25,49 @@
     >
       Borrar Cliente
     </button>
+  </app-card>
+  <app-card title="SlicePipe">
+    <b>Original</b>
+    <p class="text-primary">
+      {{ clients().join(", ") }}
+    </p>
+    <b class="mt-2">Slice:0:2</b>
+    <p class="text-primary">
+      {{ clients() | slice : 0 : 2 }}
+    </p>
+    <b class="mt-2">Slice:0:1</b>
+    <p class="text-primary">
+      {{ clients() | slice : 0 : 1 }}
+    </p>
+    <b class="mt-2">Slice:2:4</b>
+    <p class="text-primary">
+      {{ clients() | slice : 2 : 4 }}
+    </p>
+    <b class="mt-2">Slice:4:6</b>
+    <p class="text-primary">
+      {{ clients() | slice : 4 : 6 }}
+    </p>
+    <b class="mt-2">Slice:0:-3</b>
+    <p class="text-primary break-words">
+      {{ clients() | slice : 0 : -3 }}
+    </p>
+  </app-card>
+  <app-card title="JsonPipe">
+    <pre class="text-primary break-words">{{ clients() | json }}</pre>
+    <pre class="text-primary break-words">{{ client() | json }}</pre>
+    <p class="text-primary break-words">{{ clients().join(", ") | json }}</p>
+  </app-card>
+  <app-card title="KeyValuePipe">
+    <pre class="text-primary break-words">{{ person() | keyvalue | json }}</pre>
+
+    <ul>
+      @for (item of person() | keyvalue; track $index) {
+
+      <li>
+        <b class="text-primary">{{ item.key | titlecase }}</b
+        >: {{ item.value }}
+      </li>
+      }
+    </ul>
   </app-card>
 </section>
