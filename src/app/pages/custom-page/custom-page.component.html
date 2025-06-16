@@ -1,1 +1,91 @@
-<p>custom-page works!</p>
+<section class="mx-5">
+  <h1 class="text-2xl font-bold">Pipes personalizados</h1>
+  <h3 class="text-xl font-thin">Pipes no incluidos en Angular</h3>
+</section>
+<div class="stats shadow">
+  <div class="stat">
+    <div class="stat-title">ToggleCase Pipe</div>
+    <div class="stat-value">{{ name() | toggleCase : upperCase() }}</div>
+    <div class="stat-desc">{{ name() }}</div>
+    <button class="btn btn-primary mt-2" (click)="upperCase.set(!upperCase())">
+      {{ upperCase() ? "Lowercase" : "Uppercase" }}
+    </button>
+  </div>
+</div>
+
+<div class="divider my-2"></div>
+<section class="my-2">
+  <h1 class="text-xl font-bold">
+    Filtrando por: {{ searchQuery() || "Todo" }}, ordenando por:
+    {{ sortBy() || "Ninguno" }}
+  </h1>
+  <div class="flex gap-2 justify-end w-full p-2">
+    <input
+      type="text"
+      class="input input-bordered w-full max-w-xs"
+      placeholder="Filtrar por nombre"
+      #textSearch
+      (input)="searchQuery.set(textSearch.value)"
+    />
+    <div class="flex flex-1"></div>
+    <button (click)="sortBy.set('name')" class="btn btn-primary">
+      Por nombre
+    </button>
+    <button (click)="sortBy.set('canFly')" class="btn btn-accent">
+      Por volar
+    </button>
+    <button (click)="sortBy.set('color')" class="btn btn-secondary">
+      Por color
+    </button>
+    <button (click)="sortBy.set('creator')" class="btn btn-info">
+      Por creador
+    </button>
+  </div>
+</section>
+<section class="overflow-x-auto w-full">
+  <table class="table table-xs w-full">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Puede Volar</th>
+        <th>Color</th>
+        <th>Creador</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- row 1 -->
+      @for (hero of heroes() | heroFilter:searchQuery() | heroSortBy:sortBy() ;
+      track hero.id){
+      <tr>
+        <td>{{ hero.id }}</td>
+        <td>{{ hero.name }}</td>
+        <td>
+          <span
+            class="text-xs w-44"
+            [class.text-success]="hero.canFly"
+            [class.text-accent]="!hero.canFly"
+            >{{ hero.canFly | canFlyPipe }}</span
+          >
+        </td>
+        <td>
+          <span
+            class="badge badge-dash badge-accent text-xs w-44 bg-opacity-50"
+            [style.color]="hero.color | heroTextColorPipe"
+          >
+            {{ hero.color | heroColorPipe | titlecase }}
+          </span>
+        </td>
+        <td>
+          <span
+            [class.text-primary]="hero.creator === 0"
+            [class.text-accent]="hero.creator === 1"
+            >{{ hero.creator | heroCreatorPipe }}</span
+          >
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</section>
