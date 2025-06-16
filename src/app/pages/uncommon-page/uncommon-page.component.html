@@ -70,4 +70,24 @@
       }
     </ul>
   </app-card>
+
+  <app-card
+    title="AsyncPipe"
+    description="Muestra el valor de una promesa o un observable"
+  >
+    <p>{{ promiseValue | async }}</p>
+    @if(promiseValue | async; as value ){
+    <p class="text-primary">{{ value }}</p>
+    }@else {
+    <p class="text-primary">Cargando...</p>
+    }
+    <!-- Valor del observable -->
+    <h3 class="text-xl">Valor del observable:</h3>
+    <p class="text-primary">{{ myObservableTimer | async }}</p>
+    @if(myObservableTimer | async; as value ){
+    <p class="text-primary">Valor: {{ value }}</p>
+    }@else {
+    <p class="text-primary">Cargando...</p>
+    }
+  </app-card>
 </section>
